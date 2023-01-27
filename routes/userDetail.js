@@ -29,6 +29,7 @@ router.post("/userProfile/follow/request/:username",isAuth,async(req,res)=>{
     if(req.body!=null){
         followerArray.push(req.body);
         userData[0].followed=followerArray;
+        userData[0].follower= followerArray.length;
         try{
             const userData2=await userData[0].save();
             res.json(userData2);
@@ -52,6 +53,7 @@ router.delete("/userProfile/unfollow/request/:username",isAuth,async(req,res)=>{
         followerArray.splice(index,1);
        
         userData[0].followed=followerArray;
+        userData[0].follower=followerArray.length;
         try{
             const userData2=await userData[0].save();
             res.json(userData2);
